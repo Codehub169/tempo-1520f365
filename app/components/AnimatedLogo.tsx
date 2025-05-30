@@ -12,15 +12,21 @@ const AnimatedLogo: React.FC = () => {
         const length = path.getTotalLength();
         path.style.strokeDasharray = length.toString();
         path.style.strokeDashoffset = length.toString();
+        
+        // Set initial fill opacity to 0 before animation starts
+        // This ensures paths are transparent until the fill-opacity animation kicks in after its delay
+        path.style.fillOpacity = '0';
+
         // Stagger the start of drawing animation for each path
+        // The fill-opacity animation starts after the draw-path animation completes for each path
         path.style.animation = `draw-path 1.5s ease-out ${index * 0.2}s forwards, fill-opacity 0.8s ease-out ${index * 0.2 + 1.5}s forwards`;
       }
     });
   }, []);
 
-  // Placeholder SVG for hueneu logo - replace with actual logo.svg content if available
-  // This SVG is designed to be simple and allow for a line-drawing animation.
-  // The paths are separated for individual animation.
+  // Placeholder SVG for hueneu logo. 
+  // This SVG is designed for line-drawing animation with paths separated for individual animation.
+  // The keyframes for 'draw-path' and 'fill-opacity' are defined in globals.css.
   return (
     <svg
       width="200"
@@ -28,7 +34,11 @@ const AnimatedLogo: React.FC = () => {
       viewBox="0 0 200 80"
       xmlns="http://www.w3.org/2000/svg"
       aria-label="hueneu logo"
-      className="text-nearBlack fill-transparent stroke-nearBlack stroke-2"
+      // text-nearBlack sets 'currentColor'. stroke-nearBlack sets explicit stroke color.
+      // stroke-2 sets stroke-width. fill="currentColor" makes paths fill with 'currentColor'.
+      // The fill-opacity animation will make the fill visible after drawing.
+      className="text-nearBlack stroke-nearBlack stroke-2"
+      fill="currentColor" 
     >
       {/* h - using 3 paths for drawing effect */}
       <path ref={el => el && (pathsRef.current[0] = el)} d="M20 20 V60" />
@@ -53,7 +63,7 @@ const AnimatedLogo: React.FC = () => {
       <path ref={el => el && (pathsRef.current[11] = el)} d="M150 40 H165" />
       <path ref={el => el && (pathsRef.current[12] = el)} d="M150 60 H170" />
 
-      {/* u - (optional, if different style for second 'u') */}
+      {/* u - (optional, if different style for second 'u' or a different wordmark like 'hueneuu') */}
       {/* <path ref={el => el && (pathsRef.current[13] = el)} d="M180 20 V55 A5 5 0 0 0 185 60 H195 A5 5 0 0 0 200 55 V20" /> */}
     </svg>
   );

@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%; /* Default light mode background */
+    --foreground: 0 0% 3.9%; /* Default light mode foreground */
+
+    /* hueneu palette from tailwind.config.js for reference if needed directly in CSS */
+    /* --color-soft-off-white: #F0EDE8; */
+    /* --color-warm-light-gray: #D3CFC9; */
+    /* --color-muted-terracotta: #A7704F; */
+    /* --color-near-black: #1A1A1A; */
+    /* --color-dark-gray: #6B6B6B; */
+  }
+
+  /* Example for dark mode if it were to be implemented later */
+  /* .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+  } */
+
+  body {
+    @apply font-sans antialiased;
+    /* Background and text color are set in layout.tsx body tag */
+    /* e.g., bg-softOffWhite text-nearBlack */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Visually hidden class for accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+}
+
+/* Keyframes for logo path drawing */
+@keyframes draw-path {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Keyframes for logo fill opacity */
+@keyframes fill-opacity {
+  from {
+    fill-opacity: 0;
+  }
+  to {
+    fill-opacity: 1;
+  }
+}
+
+/* Keyframes for scroll indicator bounce */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
